@@ -23,7 +23,7 @@
 # units of degrees, so when angle=360, arc should draw a complete circle.
 
 import turtle
-
+import math
 bob = turtle.Turtle()
 
 def square(length):
@@ -31,21 +31,22 @@ def square(length):
         bob.fd(length)
         bob.lt(90)
 
-def polygon(t, length, n):
-    for i in range(round(n)):
+def polygon(t, length, n, angle = 360):
+    intn = round(n)
+    for i in range(intn):
         t.fd(length)
-        t.lt(360/n)
+        t.lt(angle/n)
 
 def circle(t, r):
-    polygon(t, 50, (6.28 * r) / 50)
+    polygon(t, ((2 * math.pi * r) / 100), 100)
 
-def arc(t, r, angle = 360):
-    polygon(t, 50, ((6.28 * r) // 50) * (angle // 360))
+def arc(t, r, angle):
+    polygon(t, (((2 * math.pi * r) / 100) * (angle / 360)), 100, angle)
 
 
 
 square(50)
 polygon(bob, 100, 6)
-circle(bob, 1)
-arc(bob, 1, 120)
+circle(bob, 50)
+arc(bob, 100, 180)
 turtle.mainloop()
